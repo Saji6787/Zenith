@@ -37,3 +37,20 @@ export interface User {
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;
+
+export interface Variant {
+    id_varian?: number;
+    id_produk: number;
+    nama_varian: string;
+    stok: number;
+}
+
+export interface Product {
+    id_produk?: number;
+    kategori: string;
+    deskripsi?: string;
+    harga: number;
+    merek: string;
+    nama_produk: string;
+    varians?: Varian[];
+}

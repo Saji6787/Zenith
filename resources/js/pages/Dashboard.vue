@@ -20,6 +20,12 @@ const breadcrumbs: BreadcrumbItem[] = [
         <div
             class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
         >
+            <a
+                href="/dashboard/manage/produk"
+                class="rounded bg-green-600 px-4 py-2 text-white"
+                >Manage Produk</a
+            >
+
             <div class="grid auto-rows-min gap-4 md:grid-cols-3">
                 <div
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
