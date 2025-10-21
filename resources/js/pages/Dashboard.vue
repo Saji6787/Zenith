@@ -26,6 +26,12 @@ const breadcrumbs: BreadcrumbItem[] = [
                 >Manage Produk</a
             >
 
+            <a
+                href="/dashboard/manage/user"
+                class="rounded bg-green-600 px-4 py-2 text-white"
+                >Manage User</a
+            >
+
             <div class="grid auto-rows-min gap-4 md:grid-cols-3">
                 <div
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
