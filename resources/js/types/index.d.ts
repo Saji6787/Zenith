@@ -54,3 +54,12 @@ export interface Product {
     nama_produk: string;
     varians?: Varian[];
 }
+
+export interface User {
+  id: number
+  name: string
+  email: string
+  role: string
+  no_telpon?: string | null
+  alamat?: string | null
+}
