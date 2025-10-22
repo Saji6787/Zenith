@@ -39,7 +39,7 @@ const hapusProduk = (id: number) => {
                     <td>{{ p.harga }}</td>
                     <td>
                         <a
-                            :href="`/crud/produk/${p.id_produk}/edit`"
+                            :href="`/dashboard/manage/produk/${p.id_produk}/edit`"
                             class="text-blue-600"
                             >Edit</a
                         >

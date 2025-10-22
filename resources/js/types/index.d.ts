@@ -41,6 +41,7 @@ export type BreadcrumbItemType = BreadcrumbItem;
 export interface Variant {
     id_varian?: number;
     id_produk: number;
+    gambar_varian: File | null;
     nama_varian: string;
     stok: number;
 }
@@ -52,14 +53,14 @@ export interface Product {
     harga: number;
     merek: string;
     nama_produk: string;
-    varians?: Varian[];
+    varians?: Variant[];
 }
 
 export interface User {
-  id: number
-  name: string
-  email: string
-  role: string
-  no_telpon?: string | null
-  alamat?: string | null
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    no_telpon?: string | null;
+    alamat?: string | null;
 }

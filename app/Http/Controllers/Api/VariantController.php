@@ -17,14 +17,6 @@ class VariantController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Variant $variant)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Variant $variant)
