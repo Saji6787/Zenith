@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->foreignId('id_produk')
                 ->constrained('products', 'id_produk')
                 ->onDelete('cascade');
+            $table->text('gambar_varian')->nullable();
             $table->string('nama_varian', 100);
             $table->integer('stok');
             $table->timestamps();
