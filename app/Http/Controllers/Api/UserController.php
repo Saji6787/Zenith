@@ -59,11 +59,11 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:100|unique:users,name',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'no_telpon' => 'string|max:20',
-            'alamat' => 'required|string|max:255'
+            'name' => 'required|string|max:100|unique:users,name,' . $user->id,
+            'password' => 'nullable|string|min:8',
+            'no_telpon' => 'nullable|string|max:20',
+            'alamat' => 'nullable|string|max:255',
+            'role' => 'required|in:admin,penjual,user',
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
