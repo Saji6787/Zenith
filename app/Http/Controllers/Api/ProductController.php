@@ -74,9 +74,11 @@ class ProductController extends Controller
     public function edit(int $id)
     {
         $produk = Product::findOrFail($id);
+        $variants = Variant::all()->where('id_produk', $id);
 
         return Inertia::render('crud/produk/Edit', [
-            'produk' => $produk->load('variant')
+            'produk' => $produk->load('variant'),
+            'variants' => $variants,
         ]);
     }
 
