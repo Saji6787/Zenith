@@ -1,24 +1,25 @@
 <script setup>
-import { useForm, Head, Link } from '@inertiajs/vue3'
+import { useForm, Head, Link } from "@inertiajs/vue3";
 
 const props = defineProps({
-  user: Object
-})
+  user: Object,
+  errors: Object,
+});
 
 const form = useForm({
-  name: props.user.name || '',
-  email: props.user.email || '',
-  password: '',
-  no_telpon: props.user.no_telpon || '',
-  alamat: props.user.alamat || ''
-})
+  name: props.user.name || "",
+  password: "",
+  no_telpon: props.user.no_telpon || "",
+  alamat: props.user.alamat || "",
+  role: props.user.role || 'user',
+});
 
 function submit() {
   form.put(`/dashboard/manage/user/${props.user.id}`, {
     preserveScroll: true,
-    onSuccess: () => alert('User berhasil diubah!'),
-    onError: () => alert('Terjadi kesalahan, silakan cek kembali input Anda.')
-  })
+    onSuccess: () => alert("User berhasil diubah!"),
+    onError: () => alert("Terjadi kesalahan, silakan cek kembali input Anda."),
+  });
 }
 </script>
 
@@ -33,24 +34,12 @@ function submit() {
         <!-- Nama -->
         <div>
           <label class="block text-sm font-medium text-gray-300 mb-1">Nama</label>
-          <input
-            v-model="form.name"
-            type="text"
-            class="w-full px-4 py-2 rounded-lg bg-white/10 text-white border border-white/20 focus:border-blue-400 focus:ring focus:ring-blue-300/20 outline-none"
-          />
+          <input v-model="form.name" type="text" class="w-full px-4 py-2 rounded-lg bg-white/10 text-white border border-white/20 focus:border-blue-400 focus:ring focus:ring-blue-300/20 outline-none" />
           <div v-if="form.errors.name" class="text-red-400 text-sm mt-1">{{ form.errors.name }}</div>
         </div>
 
         <!-- Email -->
-        <div>
-          <label class="block text-sm font-medium text-gray-300 mb-1">Email</label>
-          <input
-            v-model="form.email"
-            type="email"
-            class="w-full px-4 py-2 rounded-lg bg-white/10 text-white border border-white/20 focus:border-blue-400 focus:ring focus:ring-blue-300/20 outline-none"
-          />
-          <div v-if="form.errors.email" class="text-red-400 text-sm mt-1">{{ form.errors.email }}</div>
-        </div>
+
 
         <!-- Password -->
         <div>
@@ -67,39 +56,34 @@ function submit() {
         <!-- No Telpon -->
         <div>
           <label class="block text-sm font-medium text-gray-300 mb-1">No Telpon</label>
-          <input
-            v-model="form.no_telpon"
-            type="text"
-            class="w-full px-4 py-2 rounded-lg bg-white/10 text-white border border-white/20 focus:border-blue-400 focus:ring focus:ring-blue-300/20 outline-none"
-          />
+          <input v-model="form.no_telpon" type="text" class="w-full px-4 py-2 rounded-lg bg-white/10 text-white border border-white/20 focus:border-blue-400 focus:ring focus:ring-blue-300/20 outline-none" />
           <div v-if="form.errors.no_telpon" class="text-red-400 text-sm mt-1">{{ form.errors.no_telpon }}</div>
         </div>
 
         <!-- Alamat -->
         <div>
           <label class="block text-sm font-medium text-gray-300 mb-1">Alamat</label>
-          <textarea
-            v-model="form.alamat"
-            rows="3"
-            class="w-full px-4 py-2 rounded-lg bg-white/10 text-white border border-white/20 focus:border-blue-400 focus:ring focus:ring-blue-300/20 outline-none"
-          ></textarea>
+          <textarea v-model="form.alamat" rows="3" class="w-full px-4 py-2 rounded-lg bg-white/10 text-white border border-white/20 focus:border-blue-400 focus:ring focus:ring-blue-300/20 outline-none"></textarea>
           <div v-if="form.errors.alamat" class="text-red-400 text-sm mt-1">{{ form.errors.alamat }}</div>
+        </div>
+
+        <div class="mb-4">
+          <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+          <select v-model="form.role" id="role" name="role" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+            <option value="user">User</option>
+            <option value="penjual">Penjual</option>
+            <option value="admin">Admin</option>
+          </select>
+          <p v-if="errors.role" class="text-sm text-red-600 mt-1">{{ errors.role }}</p>
         </div>
 
         <!-- Tombol -->
         <div class="flex justify-between items-center pt-4">
-          <Link
-            href="/dashboard/manage/user"
-            class="text-gray-300 hover:text-blue-400 transition"
-          >
+          <Link href="/dashboard/manage/user" class="text-gray-300 hover:text-blue-400 transition">
             ← Kembali
           </Link>
 
-          <button
-            type="submit"
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow-md transition disabled:opacity-50"
-            :disabled="form.processing"
-          >
+          <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow-md transition disabled:opacity-50" :disabled="form.processing">
             Simpan Perubahan
           </button>
         </div>
