@@ -39,7 +39,7 @@ export interface User {
 export type BreadcrumbItemType = BreadcrumbItem;
 
 export interface Variant {
-    id_varian?: number;
+    id_varian: number;
     id_produk: number;
     gambar_varian: File | null;
     nama_varian: string;
