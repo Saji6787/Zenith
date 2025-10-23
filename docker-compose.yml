@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  # 1. APPLICATION SERVICE (PHP-FPM untuk Laravel)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PUID: 1000
+        PGID: 984 # Menggunakan GID 984 dari user Arch Linux Anda
+    # Memasang kode proyek lokal Anda ke dalam container
+    volumes:
+      - .:/var/www/html
+    environment:
+      # Override DB_HOST agar container app bisa menemukan container database 'db'
+      DB_HOST: db 
+      DB_DATABASE: zenith_db 
+      DB_USERNAME: user_zenith
+      DB_PASSWORD: supersecretpassword
+      
+    # Menggunakan env_file untuk menarik variabel lain seperti APP_KEY dari .env lokal
+    env_file:
+      - .env
+    networks:
+      - app-network
+
+
+  # 2. WEB SERVER SERVICE (NGINX)
+  web:
+    image: nginx:stable-alpine
+    ports:
+      - "8000:80" # Akses dari host melalui port 8000
+    volumes:
+      - .:/var/www/html
+      # Mount konfigurasi Nginx dari host
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - app-network
+      
+  # 3. DATABASE SERVICE (MySQL) - DATA PERSISTENCE
+  db:
+    image: mysql:8.0
+    platform: linux/x86_64
+    environment:
+      # Kredensial Database
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: zenith_db
+      MYSQL_USER: user_zenith
+      MYSQL_PASSWORD: supersecretpassword
+    # KRITIS: Volume yang menyimpan data fisik di host Anda
+    volumes:
+      - dbdata:/var/lib/mysql 
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+  # 4. PHPMYADMIN SERVICE (TAMBAHAN BARU)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: zenith-pma
+    environment:
+      # PMPA_HOST harus menunjuk ke service database
+      PMA_HOST: db 
+      # PMA_USER dan PMA_PASSWORD opsional, namun lebih baik login manual
+    ports:
+      # Akses dari host Anda di port 8080
+      - "8080:80" 
+    networks:
+      - app-network
+    depends_on:
+      - db
+
+# Jaringan Internal Docker
+networks:
+  app-network:
+    driver: bridge
+
+# DEFINISI VOLUME (Data Aman dan Persisten)
+volumes:
+  dbdata:
+    driver: local

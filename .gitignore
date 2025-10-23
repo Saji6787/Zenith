@@ -1,28 +1,51 @@
-/.phpunit.cache
-/bootstrap/ssr
+# ----------------------------------------------------------------------
+# 1. DEPENDENCIES & ASSETS (Wajib Diabaikan)
+# ----------------------------------------------------------------------
 /node_modules
-/public/build
-/public/hot
-/public/storage
-/storage/*.key
-/storage/pail
-/resources/js/actions
-/resources/js/routes
-/resources/js/wayfinder
 /vendor
-.DS_Store
-.env
-.env.backup
-.env.production
-.phpactor.json
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
+/public/build        # Output kompilasi Vite/Mix/Webpack
+/public/hot          # Hot Module Reloading file
+/bootstrap/ssr       # Server-Side Rendering (SSR) cache/output
 npm-debug.log
 yarn-error.log
-/auth.json
+.DS_Store            # File sistem macOS
+/.phpunit.cache
+.phpunit.result.cache
+
+# ----------------------------------------------------------------------
+# 2. FILE ENVIRONMENT (Wajib Diabaikan)
+# ----------------------------------------------------------------------
+.env                 # File environment utama (KRITIS)
+.env.* # Mengabaikan semua variasi .env (mis. .env.backup, .env.production)
+Homestead.json
+Homestead.yaml
+
+# ----------------------------------------------------------------------
+# 3. STORAGE & CACHE (Wajib Diabaikan)
+# ----------------------------------------------------------------------
+/storage/*.key
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/logs/*.log
+/public/storage      # Symlink storage
+/storage/pail        # File cache/testing Laravel Pail
+
+# ----------------------------------------------------------------------
+# 4. CONFIGURASI LOKAL (Wajib Diabaikan)
+# ----------------------------------------------------------------------
+/.idea               # Konfigurasi IDE PHPStorm/IntelliJ
+/.vscode             # Konfigurasi Editor VS Code
+/.zed                # Konfigurasi Editor ZED
 /.fleet
-/.idea
+.phpactor.json
 /.nova
-/.vscode
-/.zed
+/auth.json           # File credentials Composer (Jika ada)
+
+# ----------------------------------------------------------------------
+# 5. EKSKLUSI KHUSUS UNTUK PROYEK ANDA (TIDAK PERLU DIABAIKAN)
+# ----------------------------------------------------------------------
+# Hapus baris-baris berikut dari .gitignore Anda:
+# /resources/js/actions
+# /resources/js/routes
+# /resources/js/wayfinder
