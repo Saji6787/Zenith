@@ -3,7 +3,7 @@
 # ----------------------------------------------------------------------
 /node_modules
 /vendor
-/public/build        # Output kompilasi Vite/Mix/Webpack
+/public/build        # Output kompilasi Vite/Mix (JANGAN DI-COMMIT)
 /public/hot          # Hot Module Reloading file
 /bootstrap/ssr       # Server-Side Rendering (SSR) cache/output
 npm-debug.log
@@ -15,21 +15,23 @@ yarn-error.log
 # ----------------------------------------------------------------------
 # 2. FILE ENVIRONMENT (Wajib Diabaikan)
 # ----------------------------------------------------------------------
-.env                 # File environment utama (KRITIS)
-.env.* # Mengabaikan semua variasi .env (mis. .env.backup, .env.production)
+.env                 # File environment utama (KRITIS - Berisi APP_KEY & Password)
+.env.* # Mengabaikan semua variasi .env (mis. .env.backup)
 Homestead.json
 Homestead.yaml
+*.sqlite             # Jika pernah menggunakan SQLite
+*.sqlite-journal     # File journal SQLite
 
 # ----------------------------------------------------------------------
 # 3. STORAGE & CACHE (Wajib Diabaikan)
 # ----------------------------------------------------------------------
-/storage/*.key
+/storage/*.key       # Kunci enkripsi lokal
 /storage/framework/cache/*
 /storage/framework/sessions/*
 /storage/framework/testing/*
 /storage/logs/*.log
-/public/storage      # Symlink storage
-/storage/pail        # File cache/testing Laravel Pail
+/public/storage      # Symlink storage (link saja yang di-commit)
+/storage/pail        # File cache Laravel Pail
 
 # ----------------------------------------------------------------------
 # 4. CONFIGURASI LOKAL (Wajib Diabaikan)
@@ -45,7 +47,9 @@ Homestead.yaml
 # ----------------------------------------------------------------------
 # 5. EKSKLUSI KHUSUS UNTUK PROYEK ANDA (TIDAK PERLU DIABAIKAN)
 # ----------------------------------------------------------------------
-# Hapus baris-baris berikut dari .gitignore Anda:
+# CATATAN PENTING:
+# Baris di bawah ini adalah kode sumber Anda yang HARUS dibagikan. 
+# Biarkan tetap ter-komentar (atau hapus dari file .gitignore)
 # /resources/js/actions
 # /resources/js/routes
 # /resources/js/wayfinder
