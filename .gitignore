@@ -1,55 +1,66 @@
 # ----------------------------------------------------------------------
-# 1. DEPENDENCIES & ASSETS (Wajib Diabaikan)
+# 1. DEPENDENCIES & ASSETS
 # ----------------------------------------------------------------------
 /node_modules
 /vendor
-/public/build        # Output kompilasi Vite/Mix (JANGAN DI-COMMIT)
-/public/hot          # Hot Module Reloading file
-/bootstrap/ssr       # Server-Side Rendering (SSR) cache/output
+/public/build
+/public/hot
+/bootstrap/ssr
 npm-debug.log
 yarn-error.log
-.DS_Store            # File sistem macOS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+*.swp
+*.swo
 /.phpunit.cache
 .phpunit.result.cache
 
 # ----------------------------------------------------------------------
-# 2. FILE ENVIRONMENT (Wajib Diabaikan)
+# 2. ENVIRONMENT & SECRETS
 # ----------------------------------------------------------------------
-.env                 # File environment utama (KRITIS - Berisi APP_KEY & Password)
-.env.* # Mengabaikan semua variasi .env (mis. .env.backup)
+/.env*
 Homestead.json
 Homestead.yaml
-*.sqlite             # Jika pernah menggunakan SQLite
-*.sqlite-journal     # File journal SQLite
+*.sqlite
+*.sqlite-journal
+/storage/*.key
 
 # ----------------------------------------------------------------------
-# 3. STORAGE & CACHE (Wajib Diabaikan)
+# 3. STORAGE & CACHE
 # ----------------------------------------------------------------------
-/storage/*.key       # Kunci enkripsi lokal
-/storage/framework/cache/*
-/storage/framework/sessions/*
-/storage/framework/testing/*
-/storage/logs/*.log
-/public/storage      # Symlink storage (link saja yang di-commit)
-/storage/pail        # File cache Laravel Pail
+/storage/app/cache/
+/storage/framework/*
+!/storage/framework/.gitignore
+/storage/logs/
+/storage/pail
+/public/storage
 
 # ----------------------------------------------------------------------
-# 4. CONFIGURASI LOKAL (Wajib Diabaikan)
+# 4. IDE & LOCAL CONFIGS
 # ----------------------------------------------------------------------
-/.idea               # Konfigurasi IDE PHPStorm/IntelliJ
-/.vscode             # Konfigurasi Editor VS Code
-/.zed                # Konfigurasi Editor ZED
+/.idea
+/.vscode
+/.zed
 /.fleet
 .phpactor.json
 /.nova
-/auth.json           # File credentials Composer (Jika ada)
+/auth.json
+/phpunit.xml
+/phpcs.xml.dist
 
 # ----------------------------------------------------------------------
-# 5. EKSKLUSI KHUSUS UNTUK PROYEK ANDA (TIDAK PERLU DIABAIKAN)
+# 5. DOCKER FILES (LOCAL ONLY)
 # ----------------------------------------------------------------------
-# CATATAN PENTING:
-# Baris di bawah ini adalah kode sumber Anda yang HARUS dibagikan. 
-# Biarkan tetap ter-komentar (atau hapus dari file .gitignore)
+/.docker
+docker-compose.override.yml
+*.pid
+*.sock
+*.tar
+
+# ----------------------------------------------------------------------
+# 6. CUSTOM PROJECT EXCLUSIONS
+# ----------------------------------------------------------------------
 # /resources/js/actions
 # /resources/js/routes
 # /resources/js/wayfinder
