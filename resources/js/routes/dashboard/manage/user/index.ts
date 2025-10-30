@@ -528,7 +528,7 @@ update.patch = (args: { user: number | { id: number } } | [user: number | { id: 
     update.form = updateForm
 /**
 * @see \App\Http\Controllers\Api\UserController::destroy
- * @see app/Http/Controllers/Api/UserController.php:79
+ * @see app/Http/Controllers/Api/UserController.php:89
  * @route '/dashboard/manage/user/{user}'
  */
 export const destroy = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -543,7 +543,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\UserController::destroy
- * @see app/Http/Controllers/Api/UserController.php:79
+ * @see app/Http/Controllers/Api/UserController.php:89
  * @route '/dashboard/manage/user/{user}'
  */
 destroy.url = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -571,7 +571,7 @@ destroy.url = (args: { user: string | number } | [user: string | number ] | stri
 
 /**
 * @see \App\Http\Controllers\Api\UserController::destroy
- * @see app/Http/Controllers/Api/UserController.php:79
+ * @see app/Http/Controllers/Api/UserController.php:89
  * @route '/dashboard/manage/user/{user}'
  */
 destroy.delete = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -581,7 +581,7 @@ destroy.delete = (args: { user: string | number } | [user: string | number ] | s
 
     /**
 * @see \App\Http\Controllers\Api\UserController::destroy
- * @see app/Http/Controllers/Api/UserController.php:79
+ * @see app/Http/Controllers/Api/UserController.php:89
  * @route '/dashboard/manage/user/{user}'
  */
     const destroyForm = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -596,7 +596,7 @@ destroy.delete = (args: { user: string | number } | [user: string | number ] | s
 
             /**
 * @see \App\Http\Controllers\Api\UserController::destroy
- * @see app/Http/Controllers/Api/UserController.php:79
+ * @see app/Http/Controllers/Api/UserController.php:89
  * @route '/dashboard/manage/user/{user}'
  */
         destroyForm.delete = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

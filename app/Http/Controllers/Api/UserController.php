@@ -58,19 +58,29 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:100|unique:users,name,' . $user->id,
-            'password' => 'nullable|string|min:8',
-            'no_telpon' => 'nullable|string|max:20',
-            'alamat' => 'nullable|string|max:255',
+        // $validated = $request->validate([
+        //     'name' => 'required|string|max:100|unique:users,name,' . $user->id,
+        //     'password' => 'nullable|string|min:8',
+        //     'no_telpon' => 'nullable|string|max:20',
+        //     'alamat' => 'nullable|string|max:255',
+        //     'role' => 'required|in:admin,penjual,user',
+        // ]);
+
+        // $validated['password'] = Hash::make($validated['password']);
+
+        // $user->update($validated);
+
+        // return redirect()->route('dashboard.manage.user.index')->with('success', 'User berhasil diubah');
+
+        $request->validate([
             'role' => 'required|in:admin,penjual,user',
         ]);
 
-        $validated['password'] = Hash::make($validated['password']);
+        $user->update([
+            'role' => $request->role,
+        ]);
 
-        $user->update($validated);
-
-        return redirect()->route('dashboard.manage.user.index')->with('success', 'User berhasil diubah');
+        return back()->with('success', 'Role user berhasil diubah!');
     }
 
     /**
