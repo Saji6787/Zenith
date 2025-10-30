@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { router, usePage } from "@inertiajs/vue3";
+import { router, usePage, Link } from "@inertiajs/vue3";
 import type { User } from "../../../types";
 
 
@@ -39,7 +39,12 @@ const hapusUser = (id: number) => {
       </thead>
       <tbody>
         <tr v-for="user in users" :key="user.id">
-          <td>{{ user.id }}</td>
+          <td><Link
+              :href="`/dashboard/manage/user/${user.id}`"
+              class="text-blue-600 hover:underline"
+            >
+              {{ user.name }}
+            </Link></td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>Password</td>

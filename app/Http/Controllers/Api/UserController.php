@@ -42,7 +42,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return Inertia::render('crud/user/Show', ['user' => $user]);
     }
 
     /**
