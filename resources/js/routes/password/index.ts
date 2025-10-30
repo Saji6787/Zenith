@@ -1,83 +1,5 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
-import confirmD7e05f from './confirm'
-/**
-* @see \Laravel\Fortify\Http\Controllers\ConfirmablePasswordController::confirm
- * @see vendor/laravel/fortify/src/Http/Controllers/ConfirmablePasswordController.php:40
- * @route '/user/confirm-password'
- */
-export const confirm = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: confirm.url(options),
-    method: 'get',
-})
-
-confirm.definition = {
-    methods: ["get","head"],
-    url: '/user/confirm-password',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \Laravel\Fortify\Http\Controllers\ConfirmablePasswordController::confirm
- * @see vendor/laravel/fortify/src/Http/Controllers/ConfirmablePasswordController.php:40
- * @route '/user/confirm-password'
- */
-confirm.url = (options?: RouteQueryOptions) => {
-    return confirm.definition.url + queryParams(options)
-}
-
-/**
-* @see \Laravel\Fortify\Http\Controllers\ConfirmablePasswordController::confirm
- * @see vendor/laravel/fortify/src/Http/Controllers/ConfirmablePasswordController.php:40
- * @route '/user/confirm-password'
- */
-confirm.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: confirm.url(options),
-    method: 'get',
-})
-/**
-* @see \Laravel\Fortify\Http\Controllers\ConfirmablePasswordController::confirm
- * @see vendor/laravel/fortify/src/Http/Controllers/ConfirmablePasswordController.php:40
- * @route '/user/confirm-password'
- */
-confirm.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: confirm.url(options),
-    method: 'head',
-})
-
-    /**
-* @see \Laravel\Fortify\Http\Controllers\ConfirmablePasswordController::confirm
- * @see vendor/laravel/fortify/src/Http/Controllers/ConfirmablePasswordController.php:40
- * @route '/user/confirm-password'
- */
-    const confirmForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-        action: confirm.url(options),
-        method: 'get',
-    })
-
-            /**
-* @see \Laravel\Fortify\Http\Controllers\ConfirmablePasswordController::confirm
- * @see vendor/laravel/fortify/src/Http/Controllers/ConfirmablePasswordController.php:40
- * @route '/user/confirm-password'
- */
-        confirmForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: confirm.url(options),
-            method: 'get',
-        })
-            /**
-* @see \Laravel\Fortify\Http\Controllers\ConfirmablePasswordController::confirm
- * @see vendor/laravel/fortify/src/Http/Controllers/ConfirmablePasswordController.php:40
- * @route '/user/confirm-password'
- */
-        confirmForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: confirm.url({
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'HEAD',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'get',
-        })
-    
-    confirm.form = confirmForm
+import confirm from './confirm'
 /**
 * @see \Laravel\Fortify\Http\Controllers\ConfirmedPasswordStatusController::confirmation
  * @see vendor/laravel/fortify/src/Http/Controllers/ConfirmedPasswordStatusController.php:17
@@ -585,8 +507,8 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     
     store.form = storeForm
 const password = {
-    confirm: Object.assign(confirm, confirmD7e05f),
-confirmation: Object.assign(confirmation, confirmation),
+    confirmation: Object.assign(confirmation, confirmation),
+confirm: Object.assign(confirm, confirm),
 edit: Object.assign(edit, edit),
 update: Object.assign(update, update),
 request: Object.assign(request, request),

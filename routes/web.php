@@ -3,6 +3,7 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\VariantController;
 
@@ -27,7 +28,14 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
         });
 
         Route::resource('user', UserController::class);
+
+        Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
     });
+});
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'show'])->name('login');
+    Route::post('/login', [LoginController::class, 'store']);
 });
 
 require __DIR__ . '/settings.php';

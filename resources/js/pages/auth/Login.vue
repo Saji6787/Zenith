@@ -3,16 +3,23 @@ import InputError from "@/components/InputError.vue";
 import TextLink from "@/components/TextLink.vue";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Form, Head } from "@inertiajs/vue3";
+import { useForm, Head } from "@inertiajs/vue3";
 import { LoaderCircle } from "lucide-vue-next";
-import { store } from "@/routes/login";
-import { request } from "@/routes/password";
-import { register } from "@/routes";
 
-defineProps<{
-  status?: string;
-  canResetPassword: boolean;
-}>();
+const form = useForm({
+  email: "",
+  password: "",
+  remember: false,
+});
+
+function submit() {
+  form.post("/login");
+}
+
+// defineProps<{
+//   status?: string;
+//   canResetPassword: boolean;
+// }>();
 </script>
 
 <template>
@@ -43,42 +50,42 @@ defineProps<{
           <img src="/images/logo.png" alt="Logo" class="w-14 h-14 rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-110" />
         </div>
 
-        <Form v-bind="store.form()" :reset-on-success="['password']" v-slot="{ errors, processing }" class="flex flex-col gap-6 text-left">
+        <form @submit.prevent="submit" class="flex flex-col gap-6 text-left">
           <div class="relative">
-            <input id="email" type="email" name="email" placeholder="Email" required autofocus class="w-full bg-transparent border-b border-white focus:outline-none focus:border-white text-white placeholder:text-white/70" />
-            <InputError :message="errors.email" />
+            <input id="email" type="email" name="email" placeholder="Email" v-model="form.email" required autofocus class="w-full bg-transparent border-b border-white focus:outline-none focus:border-white text-white placeholder:text-white/70" />
+            <InputError :message="form.errors.email" />
           </div>
 
           <div class="relative">
-            <input id="password" type="password" name="password" placeholder="Password" required class="w-full bg-transparent border-b border-white focus:outline-none focus:border-white text-white placeholder:text-white/70" />
-            <InputError :message="errors.password" />
+            <input id="password" type="password" name="password" placeholder="Password" v-model="form.password" required class="w-full bg-transparent border-b border-white focus:outline-none focus:border-white text-white placeholder:text-white/70" />
+            <InputError :message="form.errors.password" />
           </div>
 
           <div class="flex items-center justify-between text-white text-sm mt-1">
             <label class="flex items-center space-x-2">
-              <Checkbox id="remember" name="remember" class="border-white text-[#203f9a]" />
+              <Checkbox id="remember" name="remember" v-model="form.remember" class="border-white text-[#203f9a]" />
               <span>Remember me</span>
             </label>
 
-            <TextLink v-if="canResetPassword" :href="request()" class="text-white underline hover:text-gray-200 transition">
+            <!-- <TextLink v-if="canResetPassword" :href="request()" class="text-white underline hover:text-gray-200 transition">
               Forgot password?
-            </TextLink>
+            </TextLink> -->
           </div>
 
           <div class="flex justify-center">
-            <Button type="submit" class="w-[240px] bg-white text-[#203f9a] font-semibold rounded-full py-2 mt-6 hover:bg-gray-100 transition" :disabled="processing">
-              <LoaderCircle v-if="processing" class="h-4 w-4 animate-spin inline mr-2" />
+            <Button type="submit" class="w-[240px] bg-white text-[#203f9a] font-semibold rounded-full py-2 mt-6 hover:bg-gray-100 transition" :disabled="form.processing">
+              <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin inline mr-2" />
               Log in
             </Button>
           </div>
 
           <div class="text-center text-white text-sm mt-3">
             Don't have an account?
-            <TextLink :href="register()" class="text-white underline hover:text-gray-200 transition">
+            <!-- <TextLink :href="register()" class="text-white underline hover:text-gray-200 transition">
               Sign up
-            </TextLink>
+            </TextLink> -->
           </div>
-        </Form>
+        </form>
       </div>
     </div>
 
