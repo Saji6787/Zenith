@@ -610,6 +610,61 @@ destroy.delete = (args: { user: string | number } | [user: string | number ] | s
         })
     
     destroy.form = destroyForm
+/**
+* @see \App\Http\Controllers\Api\UserRoleController::requestSeller
+ * @see app/Http/Controllers/Api/UserRoleController.php:13
+ * @route '/dashboard/manage/become-seller'
+ */
+export const requestSeller = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: requestSeller.url(options),
+    method: 'post',
+})
+
+requestSeller.definition = {
+    methods: ["post"],
+    url: '/dashboard/manage/become-seller',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \App\Http\Controllers\Api\UserRoleController::requestSeller
+ * @see app/Http/Controllers/Api/UserRoleController.php:13
+ * @route '/dashboard/manage/become-seller'
+ */
+requestSeller.url = (options?: RouteQueryOptions) => {
+    return requestSeller.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Api\UserRoleController::requestSeller
+ * @see app/Http/Controllers/Api/UserRoleController.php:13
+ * @route '/dashboard/manage/become-seller'
+ */
+requestSeller.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: requestSeller.url(options),
+    method: 'post',
+})
+
+    /**
+* @see \App\Http\Controllers\Api\UserRoleController::requestSeller
+ * @see app/Http/Controllers/Api/UserRoleController.php:13
+ * @route '/dashboard/manage/become-seller'
+ */
+    const requestSellerForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: requestSeller.url(options),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\Api\UserRoleController::requestSeller
+ * @see app/Http/Controllers/Api/UserRoleController.php:13
+ * @route '/dashboard/manage/become-seller'
+ */
+        requestSellerForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: requestSeller.url(options),
+            method: 'post',
+        })
+    
+    requestSeller.form = requestSellerForm
 const user = {
     index: Object.assign(index, index),
 create: Object.assign(create, create),
@@ -618,6 +673,7 @@ show: Object.assign(show, show),
 edit: Object.assign(edit, edit),
 update: Object.assign(update, update),
 destroy: Object.assign(destroy, destroy),
+requestSeller: Object.assign(requestSeller, requestSeller),
 }
 
 export default user

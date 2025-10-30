@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\VariantController;
+use App\Http\Controllers\Api\UserRoleController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -30,6 +31,12 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
         Route::resource('user', UserController::class);
 
         Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+
+        Route::post('/become-seller', [UserRoleController::class, 'requestSeller'])->name('user.requestSeller');
+
+        // admin halaman konfirmasi
+        Route::get('/admin/seller-requests', [UserRoleController::class, 'index'])->middleware('can:is-admin')->name('admin.sellerRequests');
+        Route::post('/admin/seller-requests/{user}/approve', [UserRoleController::class, 'approve'])->middleware('can:is-admin')->name('admin.sellerRequests.approve');
     });
 });
 

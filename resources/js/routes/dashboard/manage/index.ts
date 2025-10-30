@@ -1,6 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../wayfinder'
 import produk from './produk'
 import user from './user'
+import admin from './admin'
 /**
 * @see \App\Http\Controllers\Auth\LoginController::logout
  * @see app/Http/Controllers/Auth/LoginController.php:36
@@ -60,6 +61,7 @@ const manage = {
     produk: Object.assign(produk, produk),
 user: Object.assign(user, user),
 logout: Object.assign(logout, logout),
+admin: Object.assign(admin, admin),
 }
 
 export default manage
