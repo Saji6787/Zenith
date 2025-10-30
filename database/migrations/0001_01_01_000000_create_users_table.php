@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('no_telpon')->nullable();
             $table->text('alamat')->nullable();
             $table->enum('role', ['admin', 'user', 'penjual'])->default('user');
+            $table->softDeletes(); // otomatis membuat kolom deleted_at
             $table->rememberToken();
             $table->timestamps();
         });

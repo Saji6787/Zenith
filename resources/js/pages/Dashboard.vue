@@ -45,9 +45,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 
         <p v-else-if="page.props.auth.user.role === 'penjual'">
           Anda sudah menjadi penjual.
+          <a href="#" class="rounded bg-green-600 px-4 py-2 text-white">Manage Toko</a>
         </p>
 
-        <a v-else-if="page.props.auth.user.role === 'penjual'" href="/dashboard/manage/user" class="rounded bg-green-600 px-4 py-2 text-white">Manage Toko</a>
+        
       </div>
 
       <div class="grid auto-rows-min gap-4 md:grid-cols-3">
