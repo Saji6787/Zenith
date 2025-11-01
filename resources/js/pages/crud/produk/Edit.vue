@@ -3,68 +3,222 @@ import type { Product, Variant } from '@/types';
 import { router, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
+interface Kategori {
+    id: number;
+    id_kategori: number;
+    id_produk: number;
+}
+
 const page = usePage();
 const produk = ref(page.props.produk as Product);
+const kategoris = ref(page.props.categories as Kategori);
 const variants: any = page.props.variants as Variant;
+const props = defineProps<{
+    kategori: { id_kategori: number; nama_kategori: string }[];
+}>();
 
 const form = ref({
-    kategori: produk.value.kategori,
+    kategori: [{ id_kategori: '' }],
     nama_produk: produk.value.nama_produk,
     merek: produk.value.merek,
-    harga: produk.value.harga,
-    deskripsi: produk.value.deskripsi,
+    deskripsi: produk.value.deskripsi ?? '',
+    varians: [
+        {
+            gambar_varian: null as File | null,
+            nama_varian: '',
+            harga: 0,
+            stok: null,
+        },
+    ],
 });
 
-const id = produk.value.id_produk;
+function onFileChange(event: Event, index: number) {
+    const target = event.target as HTMLInputElement;
+    if (target.files && target.files.length > 0) {
+        form.value.varians[index].gambar_varian = target.files[0];
+    }
+}
+
+function addVarian() {
+    form.value.varians.push({
+        gambar_varian: null,
+        nama_varian: '',
+        harga: 0,
+        stok: null,
+    });
+}
+
+function addKategori() {
+    form.value.kategori.push({ id_kategori: '' });
+}
+
+function removeVarian(index: number) {
+    form.value.varians.splice(index, 1);
+}
+
+function removeKategori(index: number) {
+    form.value.kategori.splice(index, 1);
+}
 
 const submit = () => {
-    router.put(
-        `/dashboard/manage/produk/${produk.value.id_produk}`,
-        form.value,
-    );
-};
+    const data = new FormData();
+    data.append('nama_produk', form.value.nama_produk);
+    data.append('deskripsi', form.value.deskripsi);
+    data.append('merek', form.value.merek);
 
-const hapusVarian = (id: number) => {
-    if (confirm('Yakin ingin menghapus produk ini?')) {
-        router.delete(`/dashboard/manage/produk/varian/${id}`);
-    }
+    form.value.kategori.forEach((v, i) => {
+        data.append(`kategori[${i}][id_kategori]`, v.id_kategori);
+    });
+
+    form.value.varians.forEach((v, i) => {
+        data.append(`varians[${i}][nama_varian]`, v.nama_varian);
+        data.append(`varians[${i}][harga]`, v.harga?.toString() || '');
+        data.append(`varians[${i}][stok]`, String((v as any).stok) || '0');
+        if (v.gambar_varian) {
+            data.append(`varians[${i}][gambar_varian]`, v.gambar_varian);
+        }
+    });
+
+    router.post('/dashboard/manage/produk', data, {
+        forceFormData: true,
+    });
 };
 </script>
 
 <template>
     <div class="mx-auto max-w-3xl rounded-lg p-6 shadow">
-        <h1 class="mb-4 text-xl font-semibold">Edit Produk</h1>
+        <h1 class="mb-4 text-xl font-semibold">Tambah Produk</h1>
 
         <!-- Form produk -->
         <div class="space-y-3">
+            <label>Nama Produk</label>
             <input
                 v-model="form.nama_produk"
                 placeholder="Nama Produk"
                 class="w-full rounded border p-2"
             />
-            <input
-                v-model="form.kategori"
-                placeholder="Kategori"
-                class="w-full rounded border p-2"
-            />
+
+            <div>
+                <label>Kategori</label>
+                <div
+                    v-for="(kategori, index) in form.kategori"
+                    :key="index"
+                    class="flex flex-wrap gap-2"
+                >
+                    <select
+                        v-for="pilihan in kategoris.id_kategori"
+                        v-model="kategori.id_kategori"
+                        class="flex items-center gap-1"
+                    >
+                        <option value="">-- Pilih Kategori --</option>
+                        <option
+                            v-for="kat in props.kategori"
+                            :key="kat.id_kategori"
+                            :value="kat.id_kategori"
+                            class="text-black"
+                        >
+                            {{ kat.nama_kategori }}
+                        </option>
+                    </select>
+
+                    <button
+                        @click="removeKategori(index)"
+                        type="button"
+                        class="rounded bg-red-500 px-2 py-1 text-white"
+                    >
+                        🗑
+                    </button>
+                </div>
+
+                <button
+                    @click="addKategori"
+                    type="button"
+                    class="mt-2 rounded bg-green-500 px-3 py-1 text-white"
+                >
+                    + Tambah Kategori
+                </button>
+            </div>
+
+            <label>Merek</label>
             <input
                 v-model="form.merek"
                 placeholder="Merek"
                 class="w-full rounded border p-2"
             />
+
+            <label>Deskripsi</label>
             <textarea
                 v-model="form.deskripsi"
                 placeholder="Deskripsi"
                 class="w-full rounded border p-2"
             ></textarea>
-            <input
-                v-model="form.harga"
-                type="number"
-                placeholder="Harga"
-                class="w-full rounded border p-2"
-            />
         </div>
-        <br />
+
+        <hr class="my-5" />
+
+        <!-- Bagian varian -->
+        <h2 class="mb-2 text-lg font-semibold">Varian Produk</h2>
+        <div
+            v-for="(varian, index) in form.varians"
+            :key="index"
+            class="mb-3 flex flex-col items-start gap-2 rounded-lg border p-3 md:flex-row md:items-center"
+        >
+            <div class="w-full flex-1 space-y-2">
+                <label>Nama varian</label>
+                <input
+                    v-model="varian.nama_varian"
+                    placeholder="Nama Varian"
+                    class="w-full rounded border p-2"
+                />
+
+                <label>Harga</label>
+                <input
+                    v-model="varian.harga"
+                    type="number"
+                    placeholder="Harga"
+                    class="w-full rounded border p-2"
+                />
+
+                <label>Stok</label>
+                <input
+                    v-model="varian.stok"
+                    type="number"
+                    placeholder="Stok"
+                    class="w-full rounded border p-2"
+                />
+
+                <input
+                    type="file"
+                    accept="image/*"
+                    @change="onFileChange($event, index)"
+                />
+                <!-- <div v-if="varian.gambar_varian" class="mt-2">
+                    <img
+                        :src="URL.createObjectURL(varian.gambar_varian)"
+                        alt="Preview"
+                        class="h-20 rounded border"
+                    />
+                </div> -->
+            </div>
+            <button
+                @click="removeVarian(index)"
+                type="button"
+                class="rounded bg-red-500 px-2 py-1 text-white"
+            >
+                🗑
+            </button>
+        </div>
+
+        <button
+            @click="addVarian"
+            type="button"
+            class="mt-2 rounded bg-green-500 px-3 py-1 text-white"
+        >
+            + Tambah Varian
+        </button>
+
+        <hr class="my-5" />
+
         <button
             @click="submit"
             type="button"
@@ -72,48 +226,5 @@ const hapusVarian = (id: number) => {
         >
             Simpan Produk
         </button>
-        <br /><br />
-        <h2 class="mb-4 text-2xl font-bold">Daftar Varian</h2>
-        <a
-            :href="`/dashboard/manage/produk/varian/create/${id}`"
-            class="rounded bg-green-600 px-4 py-2 text-white"
-            >Tambah Varian</a
-        >
-
-        <table class="mt-6 w-full border">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Gambar</th>
-                    <th>Nama</th>
-                    <th>Stok</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="p in variants" :key="p.id_varian">
-                    <td>{{ p.id_varian }}</td>
-                    <td>
-                        <img :src="`/storage/${p.gambar_varian}`" width="200" />
-                    </td>
-                    <td>{{ p.nama_varian }}</td>
-                    <td>{{ p.stok }}</td>
-                    <td>
-                        <a
-                            :href="`/dashboard/manage/produk/varian/${p.id_varian}/edit`"
-                            class="text-blue-600"
-                            >Edit</a
-                        >
-                        |
-                        <button
-                            @click="hapusVarian(p.id_varian!)"
-                            class="text-red-600"
-                        >
-                            Hapus
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 </template>

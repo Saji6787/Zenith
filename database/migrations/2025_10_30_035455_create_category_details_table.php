@@ -10,15 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('variants', function (Blueprint $table) {
-            $table->id('id_varian');
+        Schema::create('category_details', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('id_produk')
                 ->constrained('products', 'id_produk')
                 ->onDelete('cascade');
-            $table->text('gambar_varian')->nullable();
-            $table->string('nama_varian', 100);
-            $table->decimal('harga', 12, 2);
-            $table->integer('stok');
+            $table->foreignId('id_kategori')
+                ->constrained('categories', 'id_kategori')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('variants');
+        Schema::dropIfExists('category_details');
     }
 };
