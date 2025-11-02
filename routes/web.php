@@ -30,7 +30,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
 
         Route::resource('user', UserController::class);
 
-        Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+        // Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
         Route::post('/become-seller', [UserRoleController::class, 'requestSeller'])->name('user.requestSeller');
 
@@ -40,10 +40,10 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
     });
 });
 
-Route::middleware('guest')->group(function () {
-    Route::get('/login', [LoginController::class, 'show'])->name('login');
-    Route::post('/login', [LoginController::class, 'store']);
-});
+// Route::middleware('guest')->group(function () {
+//     Route::get('/login', [LoginController::class, 'show'])->name('login');
+//     Route::post('/login', [LoginController::class, 'store']);
+// });
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
