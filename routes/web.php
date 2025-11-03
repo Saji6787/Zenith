@@ -15,5 +15,9 @@ Route::get('test', function () {
     return 'Test Abdian';
 });
 
+Route::get('teste', function () {
+    return 'test test';
+});
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
