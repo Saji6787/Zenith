@@ -15,8 +15,8 @@ Route::get('test', function () {
     return 'Test Abdian';
 });
 
-Route::get('teste', function () {
-    return 'test test';
+Route::get('testlalgi', function () {
+    return 'halo';
 });
 
 require __DIR__.'/settings.php';
