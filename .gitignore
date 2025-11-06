@@ -1,28 +1,66 @@
-/.phpunit.cache
-/bootstrap/ssr
+# ----------------------------------------------------------------------
+# 1. DEPENDENCIES & ASSETS
+# ----------------------------------------------------------------------
 /node_modules
+/vendor
 /public/build
 /public/hot
-/public/storage
-/storage/*.key
-/storage/pail
-/resources/js/actions
-/resources/js/routes
-/resources/js/wayfinder
-/vendor
-.DS_Store
-.env
-.env.backup
-.env.production
-.phpactor.json
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
+/bootstrap/ssr
 npm-debug.log
 yarn-error.log
-/auth.json
-/.fleet
+.DS_Store
+Thumbs.db
+ehthumbs.db
+*.swp
+*.swo
+/.phpunit.cache
+.phpunit.result.cache
+
+# ----------------------------------------------------------------------
+# 2. ENVIRONMENT & SECRETS
+# ----------------------------------------------------------------------
+/.env*
+Homestead.json
+Homestead.yaml
+*.sqlite
+*.sqlite-journal
+/storage/*.key
+
+# ----------------------------------------------------------------------
+# 3. STORAGE & CACHE
+# ----------------------------------------------------------------------
+/storage/app/cache/
+/storage/framework/*
+!/storage/framework/.gitignore
+/storage/logs/
+/storage/pail
+/public/storage
+
+# ----------------------------------------------------------------------
+# 4. IDE & LOCAL CONFIGS
+# ----------------------------------------------------------------------
 /.idea
-/.nova
 /.vscode
 /.zed
+/.fleet
+.phpactor.json
+/.nova
+/auth.json
+/phpunit.xml
+/phpcs.xml.dist
+
+# ----------------------------------------------------------------------
+# 5. DOCKER FILES (LOCAL ONLY)
+# ----------------------------------------------------------------------
+/.docker
+docker-compose.override.yml
+*.pid
+*.sock
+*.tar
+
+# ----------------------------------------------------------------------
+# 6. CUSTOM PROJECT EXCLUSIONS
+# ----------------------------------------------------------------------
+# /resources/js/actions
+# /resources/js/routes
+# /resources/js/wayfinder

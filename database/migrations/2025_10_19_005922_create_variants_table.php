@@ -17,6 +17,7 @@ return new class extends Migration {
                 ->onDelete('cascade');
             $table->text('gambar_varian')->nullable();
             $table->string('nama_varian', 100);
+            $table->decimal('harga', 12, 2);
             $table->integer('stok');
             $table->timestamps();
         });

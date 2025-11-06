@@ -43,14 +43,14 @@ export interface Variant {
     id_produk: number;
     gambar_varian: File | null;
     nama_varian: string;
+    harga: number;
     stok: number;
 }
 
 export interface Product {
-    id_produk?: number;
+    id_produk: number;
     kategori: string;
     deskripsi?: string;
-    harga: number;
     merek: string;
     nama_produk: string;
     varians?: Variant[];

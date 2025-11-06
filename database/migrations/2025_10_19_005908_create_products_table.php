@@ -12,9 +12,7 @@ return new class extends Migration {
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id('id_produk');
-            $table->string('kategori', 100);
             $table->text('deskripsi')->nullable();
-            $table->decimal('harga', 12, 2);
             $table->string('merek', 100);
             $table->string('nama_produk', 150);
             $table->timestamps();
