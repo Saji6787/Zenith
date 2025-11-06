@@ -1,137 +1,120 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../../wayfinder'
 /**
-* @see \App\Http\Controllers\Auth\RegisteredUserController::create
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:20
- * @route '/register'
- */
-export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: create.url(options),
-    method: 'get',
-})
-
-create.definition = {
-    methods: ["get","head"],
-    url: '/register',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\Auth\RegisteredUserController::create
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:20
- * @route '/register'
- */
-create.url = (options?: RouteQueryOptions) => {
-    return create.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Auth\RegisteredUserController::create
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:20
- * @route '/register'
- */
-create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: create.url(options),
-    method: 'get',
-})
-/**
-* @see \App\Http\Controllers\Auth\RegisteredUserController::create
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:20
- * @route '/register'
- */
-create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: create.url(options),
-    method: 'head',
-})
-
-    /**
-* @see \App\Http\Controllers\Auth\RegisteredUserController::create
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:20
- * @route '/register'
- */
-    const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-        action: create.url(options),
-        method: 'get',
-    })
-
-            /**
-* @see \App\Http\Controllers\Auth\RegisteredUserController::create
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:20
- * @route '/register'
- */
-        createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: create.url(options),
-            method: 'get',
-        })
-            /**
-* @see \App\Http\Controllers\Auth\RegisteredUserController::create
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:20
- * @route '/register'
- */
-        createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: create.url({
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'HEAD',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'get',
-        })
-    
-    create.form = createForm
-/**
 * @see \App\Http\Controllers\Auth\RegisteredUserController::store
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:30
- * @route '/register'
+ * @see app/Http/Controllers/Auth/RegisteredUserController.php:31
+ * @route '/api/register'
  */
-export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: store.url(options),
+const store081b1c69c5c56495bfbc4baf15cc7ab2 = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store081b1c69c5c56495bfbc4baf15cc7ab2.url(options),
     method: 'post',
 })
 
-store.definition = {
+store081b1c69c5c56495bfbc4baf15cc7ab2.definition = {
+    methods: ["post"],
+    url: '/api/register',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \App\Http\Controllers\Auth\RegisteredUserController::store
+ * @see app/Http/Controllers/Auth/RegisteredUserController.php:31
+ * @route '/api/register'
+ */
+store081b1c69c5c56495bfbc4baf15cc7ab2.url = (options?: RouteQueryOptions) => {
+    return store081b1c69c5c56495bfbc4baf15cc7ab2.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Auth\RegisteredUserController::store
+ * @see app/Http/Controllers/Auth/RegisteredUserController.php:31
+ * @route '/api/register'
+ */
+store081b1c69c5c56495bfbc4baf15cc7ab2.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store081b1c69c5c56495bfbc4baf15cc7ab2.url(options),
+    method: 'post',
+})
+
+    /**
+* @see \App\Http\Controllers\Auth\RegisteredUserController::store
+ * @see app/Http/Controllers/Auth/RegisteredUserController.php:31
+ * @route '/api/register'
+ */
+    const store081b1c69c5c56495bfbc4baf15cc7ab2Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: store081b1c69c5c56495bfbc4baf15cc7ab2.url(options),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\Auth\RegisteredUserController::store
+ * @see app/Http/Controllers/Auth/RegisteredUserController.php:31
+ * @route '/api/register'
+ */
+        store081b1c69c5c56495bfbc4baf15cc7ab2Form.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: store081b1c69c5c56495bfbc4baf15cc7ab2.url(options),
+            method: 'post',
+        })
+    
+    store081b1c69c5c56495bfbc4baf15cc7ab2.form = store081b1c69c5c56495bfbc4baf15cc7ab2Form
+    /**
+* @see \App\Http\Controllers\Auth\RegisteredUserController::store
+ * @see app/Http/Controllers/Auth/RegisteredUserController.php:31
+ * @route '/register'
+ */
+const storee9819db9819a1d19b38dd89a0c4218c4 = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: storee9819db9819a1d19b38dd89a0c4218c4.url(options),
+    method: 'post',
+})
+
+storee9819db9819a1d19b38dd89a0c4218c4.definition = {
     methods: ["post"],
     url: '/register',
 } satisfies RouteDefinition<["post"]>
 
 /**
 * @see \App\Http\Controllers\Auth\RegisteredUserController::store
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:30
+ * @see app/Http/Controllers/Auth/RegisteredUserController.php:31
  * @route '/register'
  */
-store.url = (options?: RouteQueryOptions) => {
-    return store.definition.url + queryParams(options)
+storee9819db9819a1d19b38dd89a0c4218c4.url = (options?: RouteQueryOptions) => {
+    return storee9819db9819a1d19b38dd89a0c4218c4.definition.url + queryParams(options)
 }
 
 /**
 * @see \App\Http\Controllers\Auth\RegisteredUserController::store
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:30
+ * @see app/Http/Controllers/Auth/RegisteredUserController.php:31
  * @route '/register'
  */
-store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: store.url(options),
+storee9819db9819a1d19b38dd89a0c4218c4.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: storee9819db9819a1d19b38dd89a0c4218c4.url(options),
     method: 'post',
 })
 
     /**
 * @see \App\Http\Controllers\Auth\RegisteredUserController::store
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:30
+ * @see app/Http/Controllers/Auth/RegisteredUserController.php:31
  * @route '/register'
  */
-    const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-        action: store.url(options),
+    const storee9819db9819a1d19b38dd89a0c4218c4Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: storee9819db9819a1d19b38dd89a0c4218c4.url(options),
         method: 'post',
     })
 
             /**
 * @see \App\Http\Controllers\Auth\RegisteredUserController::store
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:30
+ * @see app/Http/Controllers/Auth/RegisteredUserController.php:31
  * @route '/register'
  */
-        storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-            action: store.url(options),
+        storee9819db9819a1d19b38dd89a0c4218c4Form.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: storee9819db9819a1d19b38dd89a0c4218c4.url(options),
             method: 'post',
         })
     
-    store.form = storeForm
-const RegisteredUserController = { create, store }
+    storee9819db9819a1d19b38dd89a0c4218c4.form = storee9819db9819a1d19b38dd89a0c4218c4Form
+
+export const store = {
+    '/api/register': store081b1c69c5c56495bfbc4baf15cc7ab2,
+    '/register': storee9819db9819a1d19b38dd89a0c4218c4,
+}
+
+const RegisteredUserController = { store }
 
 export default RegisteredUserController

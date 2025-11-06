@@ -1,8 +1,8 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
 /**
-* @see \App\Http\Controllers\Auth\RegisteredUserController::store
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:31
- * @route '/register'
+* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::store
+ * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:58
+ * @route '/login'
  */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
@@ -11,22 +11,22 @@ export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => (
 
 store.definition = {
     methods: ["post"],
-    url: '/register',
+    url: '/login',
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see \App\Http\Controllers\Auth\RegisteredUserController::store
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:31
- * @route '/register'
+* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::store
+ * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:58
+ * @route '/login'
  */
 store.url = (options?: RouteQueryOptions) => {
     return store.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\Auth\RegisteredUserController::store
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:31
- * @route '/register'
+* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::store
+ * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:58
+ * @route '/login'
  */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
@@ -34,9 +34,9 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 })
 
     /**
-* @see \App\Http\Controllers\Auth\RegisteredUserController::store
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:31
- * @route '/register'
+* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::store
+ * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:58
+ * @route '/login'
  */
     const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: store.url(options),
@@ -44,9 +44,9 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     })
 
             /**
-* @see \App\Http\Controllers\Auth\RegisteredUserController::store
- * @see app/Http/Controllers/Auth/RegisteredUserController.php:31
- * @route '/register'
+* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::store
+ * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:58
+ * @route '/login'
  */
         storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: store.url(options),
@@ -54,8 +54,8 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
         })
     
     store.form = storeForm
-const register = {
+const login = {
     store: Object.assign(store, store),
 }
 
-export default register
+export default login
